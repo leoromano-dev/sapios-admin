@@ -9,7 +9,7 @@
     "http-proxy-middleware": "^2.0.6",
     "https": "^1.0.0",
     "izitoast": "^1.4.0",
-    "node": "^21.6.2",
+    "node": "^18",
     "xlsx": "^0.18.5"
   },
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "name": "inserir-agentes-sapios-chat",
   "version": "1.0.0",
-  "main": "planilha.js",
+  "main": "inde.html",
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
