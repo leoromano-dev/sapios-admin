@@ -5,22 +5,23 @@ const cors = require('cors');
 const { info } = require('console');
 const fetch = require('fetch')
 const fs = require('fs');
-const https = require('https'); // Importe o módulo https
+const https = require('https');
 
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3000;
 
 app.use(cors()); 
 app.use(express.static('public'));
-
-const options = {
-    key: fs.readFileSync('privatekey.pem'), // Caminho para sua chave privada
-    cert: fs.readFileSync('cert.pem') // Caminho para seu certificado SSL/TLS
-  };
+app.use(bodyParser.json());
 
 
 let returnSitesFromsheet;
+
+const options = {
+    key: fs.readFileSync('privatekey.pem'),
+    cert: fs.readFileSync('cert.pem')
+  };
 
 const filePath = 'enviroments.json';
 
@@ -280,6 +281,9 @@ function buscarUsuario(nome) {
 //     console.log(`Servidor ouvindo em http://localhost:${port}`);
 // });
 
+https.createServer(options, app).listen(port, () => {
+    console.log(`Servidor ouvindo em https://localhost:${port}`);
+});
 
 // ------------------------rotas de update --------------------------------------------//
 app.put('/api/updateDepartament', async(req, res) => {
@@ -471,8 +475,3 @@ app.post('/api/updateEnvList', async (req, res) => {
         res.status(500).json({ message: 'Erro ao cadastrar item' });
     }
 });
-
-
-https.createServer(options, app).listen(port, () => {
-    console.log(`Servidor ouvindo em https://localhost:${port}`);
-  });
