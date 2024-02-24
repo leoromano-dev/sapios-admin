@@ -10,7 +10,10 @@
     "https": "^1.0.0",
     "izitoast": "^1.4.0",
     "node": "^18",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "engines": {
+      "node": "^18.x"
+    }
   },
   "scripts": {
     "start": "node server.js"
