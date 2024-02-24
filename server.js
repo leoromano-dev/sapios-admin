@@ -5,6 +5,7 @@ const cors = require('cors');
 const { info } = require('console');
 const fetch = require('fetch')
 const fs = require('fs');
+const https = require('https'); // Importe o módulo https
 
 
 const app = express();
@@ -12,6 +13,11 @@ const port = 3000;
 
 app.use(cors()); 
 app.use(express.static('public'));
+
+const options = {
+    key: fs.readFileSync('privatekey.pem'), // Caminho para sua chave privada
+    cert: fs.readFileSync('cert.pem') // Caminho para seu certificado SSL/TLS
+  };
 
 
 let returnSitesFromsheet;
@@ -270,9 +276,9 @@ function buscarUsuario(nome) {
     return null;
 }
 
-app.listen(port, () => {
-    console.log(`Servidor ouvindo em http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Servidor ouvindo em http://localhost:${port}`);
+// });
 
 
 // ------------------------rotas de update --------------------------------------------//
@@ -465,3 +471,8 @@ app.post('/api/updateEnvList', async (req, res) => {
         res.status(500).json({ message: 'Erro ao cadastrar item' });
     }
 });
+
+
+https.createServer(options, app).listen(port, () => {
+    console.log(`Servidor ouvindo em https://localhost:${port}`);
+  });
