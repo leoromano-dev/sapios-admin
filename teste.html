@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filter Table</title>
+<style>
+    /* Estilos opcionais para a tabela e o campo de entrada */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+
+<input type="text" id="searchInput" placeholder="Digite nome, usuário ou email">
+
+<table id="userTable">
+    <thead>
+        <tr class="userInfoHeader">
+            <th>Nome</th>
+            <th>Usuário</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Sapios.Cat</td><td>Sapios.cat</td><td>sapioscat@gmail.com</td><td>online</td></tr>
+        <tr><td>Bete</td><td>bete</td><td>bete@ddbc.com.br</td><td>online</td></tr>
+        <tr><td>Guilherme</td><td>guilherme</td><td>guilherme@ddbc.com.br</td><td>offline</td></tr>
+        <tr><td>Sapios Admin</td><td>sapiosadmin</td><td>pmantovani@sapios.com.br</td><td>offline</td></tr>
+        <tr><td>Sapios Bot</td><td>sapiosbot</td><td>suporte@sapios.com.br</td><td>online</td></tr>
+    </tbody>
+</table>
+
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("userTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<div class="users-env-content">
+    <div><b>Usuarios</b></div>
+    <div>Online: </div>
+    <div>Ocupado: </div>
+    <div>Ausente: </div>
+    <div>Offline: </div>
+    <div>Total: </div>
+</div>
+
+<div class="type-users">
+    <div><b>Tipos</b></div>
+    <div>Usuarios conectados: </div>
+    <div>Usuarios Ativos: </div>
+    <div>Usuarios desativados: </div>
+    <div>Offline: </div>
+    <div>Usuarios app: </div>
+</div>
+
+
+</body>
+</html>

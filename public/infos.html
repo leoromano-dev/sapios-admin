@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapios Chat - Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Adicionando estilos adicionais -->
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Adicionando scripts do Bootstrap 5 e jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Adicionando seu arquivo de estilo -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_form.css">
+    <link rel="stylesheet" href="css/style-toogle-menu.css">
+    <link rel="stylesheet" href="css/info-enviroment.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+
+     
+</head>
+
+<body class="box">
+    <div class="header">
+        <header>
+            <div class="logo">
+                <img class="logo-img" src="https://sapios.com.br/novosite/wp-content/uploads/2021/05/sapios-logo2x.png" alt="Imagem de exemplo">
+            </div>
+            <div class="btns-header">
+                <a href="index.html">USUÁRIOS</a>
+                <a href="departamentos.html">DEPARTAMENTOS</a></div>
+                <a class="in-page" href="infos.html">
+                    <div class="btn-header-info">
+                        <i class="bi-5x bi-info-square"></i>
+                    </div>
+                </a>
+        </header>
+    </div>
+    <main>
+ <div class="info-enviroment-content">
+                    <div class="info-env-menu">
+                        <h3>Informações do ambiente</h3>
+                            <div id='workspace-data' class="options in-options-menu">
+                              <p>Dados do Workspace</p>    
+                            </div>
+                            <div id='all-workspace-data' class="options">
+                                <p>Dados de todos Workspaces</p>    
+                            </div>
+                            <div id='create-enviroment' class="options">
+                                <p>Cadastrar novo ambiente</p>    
+                            </div>                      
+                    </div>
+                    <div id="info-env-content" class="info-env-content" style="display: flex;">
+
+                        <div class="env-content-container">
+
+                        ' <div class="first-line-env">
+                                <label for="statusFilter">Selecione o ambiente:</label>
+                                <select id="statusFilter" onchange="getEnvInfo()">
+                                    <option value="https://sapios.chat">Sapios Chat</option>
+                                    <option value="https://hapvida.sapios.com.br">Hapvida</option>
+                                    <option value="https://sales.sapios.com.br">Sales</option>
+                                    <option value="https://hapvidapgc.sapios.com.br">PGC</option>
+                                    <option value="https://promed.sapios.com.br">Promed</option>
+                                    <option value="https://lifeplace.sapios.chat">Lifeplace</option>
+                                </select>
+                                <button id="load-env-button">Carregar Dados</button>                        
+                            </div>
+
+                            <div class="env-content-wrapper">
+                                <div id="env-content-1" class="env-content-1"></div>
+                                <div id="env-content-2" class="env-content-2"></div>
+                                <div id="env-content-3" class="env-content-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="info-all-content" class="info-all-content" style="display: none;">
+                     teste1
+                    </div>
+
+                    <div id="new-env-content" class="new-env-content" style="display: none;">
+                        <div class="create-env-content">
+                            <div class="new-env-header">
+                                <h2>Novo ambiente</h2>
+                            </div>
+                            
+                            <label>Nome no ambiente</label>
+                            <input type="text">
+
+                            <label>URL no ambiente</label>
+                            <input type="text">
+
+                            <label>Auth Token</label>
+                            <input type="text">
+
+                            <label>User Id</label>
+                            <input type="text">
+
+                            <button id="save-env" class="save-env">Cadastrar ambiente</button>
+                        </div>
+                    </div>
+            </div>
+        
+    </main>
+    <footer></footer>
+    <script src="js/components/toggle-menu-components.js" ></script>
+    <script src="js/components/apis-messages.js"></script>
+    <script src="js/info-enviroments.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+<script>
+      document.addEventListener("DOMContentLoaded", function () {
+            var options = document.querySelectorAll('.options');
+            options.forEach(function (option) {
+                option.addEventListener('click', function () {
+                    var targetId = this.id;
+                    if (targetId === 'all-workspace-data') {
+                        document.getElementById('info-env-content').style.display = 'none';
+                        document.getElementById('workspace-data').classList.remove('in-options-menu');
+
+                        document.getElementById('info-all-content').style.display = 'flex';
+                        document.getElementById('all-workspace-data').classList.add('in-options-menu');
+
+                        document.getElementById('new-env-content').style.display = 'none';
+                        document.getElementById('create-enviroment').classList.remove('in-options-menu');
+
+                    }else if(targetId === 'workspace-data'){
+                        document.getElementById('info-env-content').style.display = 'flex';
+                        document.getElementById('workspace-data').classList.add('in-options-menu');
+
+
+                        document.getElementById('info-all-content').style.display = 'none';
+                        document.getElementById('all-workspace-data').classList.remove('in-options-menu');
+
+
+                        document.getElementById('new-env-content').style.display = 'none';
+                        document.getElementById('create-enviroment').classList.remove('in-options-menu');
+
+
+                    }else if(targetId === 'create-enviroment'){
+                        document.getElementById('info-env-content').style.display = 'none';
+                        document.getElementById('workspace-data').classList.remove('in-options-menu');
+
+                        document.getElementById('info-all-content').style.display = 'none';
+                        document.getElementById('all-workspace-data').classList.remove('in-options-menu');
+
+                        document.getElementById('new-env-content').style.display = 'flex';
+                        document.getElementById('create-enviroment').classList.add('in-options-menu');
+
+                    }
+                });
+            });
+        });
+</script>
+
+</html>
