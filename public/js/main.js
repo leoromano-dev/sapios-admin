@@ -5,6 +5,7 @@ document.getElementById('load-data-button').addEventListener('click', function()
 
 document.addEventListener('DOMContentLoaded', loadData);
 
+const host = window.location.host;
 
 async function loadData() {
   try {
@@ -18,7 +19,7 @@ async function loadData() {
     const siteSelected = document.getElementById("statusFilter").value;
     console.log(siteSelected)
 
-    const apiUrl = `http://localhost:3000/api/users?site=${encodeURIComponent(
+    const apiUrl = `http://${host}/api/users?site=${encodeURIComponent(
       siteSelected
     )}`;
 
@@ -56,7 +57,7 @@ async function rolesList() {
     const siteSelected = document.getElementById("statusFilter").value;
     console.log(siteSelected)
 
-    const apiUrl = `http://localhost:3000/api/rolesList?site=${encodeURIComponent(
+    const apiUrl = `http://${host}/api/rolesList?site=${encodeURIComponent(
       siteSelected
     )}`;
 
@@ -701,7 +702,7 @@ function updateAgent(){
 async function udapetUser(dataUserUpdate) {
   try {
     const siteSelected = document.getElementById("statusFilter").value;
-    const apiUrl = `http://localhost:3000/api/updateUser?site=${encodeURIComponent(siteSelected)}`;
+    const apiUrl = `http://${host}/api/updateUser?site=${encodeURIComponent(siteSelected)}`;
   
     const headers = {
         'Content-Type': 'application/json',
