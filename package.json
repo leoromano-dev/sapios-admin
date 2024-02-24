@@ -9,7 +9,7 @@
     "http-proxy-middleware": "^2.0.6",
     "https": "^1.0.0",
     "izitoast": "^1.4.0",
-    "node": "^21.2.0",
+    "node": "^21.6.2",
     "xlsx": "^0.18.5"
   },
   "scripts": {
