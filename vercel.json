@@ -2,7 +2,7 @@
     "version":2,
     "buids":[
         {
-            "src":"server,js",
+            "src":"server.js",
             "user": "@versel/node"
         }
     ],"routes": [
