@@ -12,7 +12,7 @@
     "xlsx": "^0.18.5"
   },
   "scripts": {
-    "start": "webpack -w"
+    "start": "node server"
   },
   "name": "inserir-agentes-sapios-chat",
   "version": "1.0.0",
