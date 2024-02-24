@@ -3,7 +3,7 @@
     "builds":[
         {
             "src":"server.js",
-            "user": "@versel/node"
+            "use": "@versel/node"
         }
     ],"routes": [
         {
