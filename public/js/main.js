@@ -19,7 +19,7 @@ async function loadData() {
     const siteSelected = document.getElementById("statusFilter").value;
     console.log(siteSelected)
 
-    const apiUrl = `http://${host}/api/users?site=${encodeURIComponent(
+    const apiUrl = `https://${host}/api/users?site=${encodeURIComponent(
       siteSelected
     )}`;
 
@@ -57,7 +57,7 @@ async function rolesList() {
     const siteSelected = document.getElementById("statusFilter").value;
     console.log(siteSelected)
 
-    const apiUrl = `http://${host}/api/rolesList?site=${encodeURIComponent(
+    const apiUrl = `https://${host}/api/rolesList?site=${encodeURIComponent(
       siteSelected
     )}`;
 
@@ -702,7 +702,7 @@ function updateAgent(){
 async function udapetUser(dataUserUpdate) {
   try {
     const siteSelected = document.getElementById("statusFilter").value;
-    const apiUrl = `http://${host}/api/updateUser?site=${encodeURIComponent(siteSelected)}`;
+    const apiUrl = `https://${host}/api/updateUser?site=${encodeURIComponent(siteSelected)}`;
   
     const headers = {
         'Content-Type': 'application/json',
